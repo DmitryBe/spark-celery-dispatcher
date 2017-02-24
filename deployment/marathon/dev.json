@@ -1,0 +1,37 @@
+{
+  "id": "/celery-app",
+  "apps": [
+    {
+      "id": "node",
+      "cmd": "/app_root/entry_point.sh worker",
+      "cpus": 1,
+      "mem": 4000.0,
+      "ports": [0],
+      "requirePorts": false,
+      "labels": {
+        "traefik.portIndex": "0",
+        "traefik.frontend.passHostHeader": "true",
+        "appname": "celery-app"
+      },
+      "instances": 1,
+      "container": {
+        "type": "DOCKER",
+        "volumes": [
+          {
+            "containerPath": "/var/log",
+            "hostPath": "/var/log",
+            "mode": "RW"
+          }
+        ],
+        "docker": {
+          "image": "docker-dev.hli.io/ccm/celery-worker-dev:0.0.1",
+          "network": "HOST",
+          "forcePullImage": true,
+          "parameters": [
+            { "key": "env", "value": "FORCE_UPDATE=0" }
+          ]
+        }
+      }
+    }
+  ]
+}
