@@ -30,4 +30,4 @@ run-worker-local:
 	docker run -it --rm --net=host docker-dev.hli.io/ccm/celery-worker-dev:0.0.1 worker
 
 run-python-local:
-	docker run -it --rm --net=host docker-dev.hli.io/ccm/celery-worker-dev:0.0.1 ipython
+	docker run -it --rm --net=host -v /home/ubuntu/dmitry/conf/hive-site.xml:/usr/local/spark/conf/hive-site.xml docker-dev.hli.io/ccm/celery-worker-dev:0.0.1 ipython

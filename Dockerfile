@@ -7,10 +7,11 @@ WORKDIR ${APP_DIR}
 
 # python requirements add && install
 ADD requirements.txt ${APP_DIR}
-RUN pip install py4j && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # env for pyspark;
 ENV PYTHONPATH $SPARK_HOME/python/:$PYTHONPATH
+ENV PYTHONPATH="$SPARK_HOME/python/lib/py4j-0.10.1-src.zip:$PYTHONPATH"
 
 # copy app
 COPY ./app ${APP_DIR}/app
